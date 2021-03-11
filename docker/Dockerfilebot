@@ -51,7 +51,10 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              file \
                              libtool \
                              openssh \
-                             procps-ng
+                             procps-ng \
+&& rm -rf /var/cache/apk/* \
+&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+&& echo "Asia/Shanghai" > /etc/timezone \
 RUN sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers
 RUN useradd pagermaid -r -m -d /pagermaid
 RUN usermod -aG wheel,users pagermaid
