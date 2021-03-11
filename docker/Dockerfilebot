@@ -1,11 +1,13 @@
 FROM ubuntu:20.04
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
+    LC_ALL=C \
     SHELL=/bin/bash \
     PS1="\u@\h:\w \$ " \
     DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y python3 \
-    && apt-get upgrade \
+SHELL ["/bin/bash", "-c"]
+RUN apt-get update && \
+    apt-get install -y python3 \
     && apt-get install -y tzdata \
                              tzdata \
                              python3-pip \
