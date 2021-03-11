@@ -9,7 +9,6 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update && \
     apt-get install -y python3 \
     && apt-get install -y tzdata \
-                             tzdata \
                              python3-pip \
                              python3-dev \
                              libffi \
