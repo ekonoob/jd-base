@@ -1,0 +1,64 @@
+FROM python:3.8-alpine3.12
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    LANG=zh_CN.UTF-8 \
+    SHELL=/bin/bash \
+    PS1="\u@\h:\w \$ " \
+    DEBIAN_FRONTEND=noninteractive
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && pip3 install psutil pyqrcode pypng pyzbar emoji email_validator youtube_dl pyyaml redis coloredlogs requests pytz cowpy googletrans translate gtts gtts-token wordcloud telethon pillow python-magic pygments distutils2-py3 speedtest-cli gitpython werkzeug flask flask_sqlalchemy flask_login flask_bcrypt flask_wtf wtforms cheroot PySocks certifi magic_google \
+    && apk update -f \
+    && apk upgrade \
+    && apk --no-cache add -f bash \
+                             tzdata \
+                             libffi \
+                             tesseract \
+                             coreutils \
+                             moreutils \
+                             bzip2 \
+                             git \
+                             zlib \
+                             readline \
+                             wget \
+                             sqlite \
+                             neofetch \
+                             fortune-mod \
+                             curl \
+                             figlet \
+                             python-virtualenv \
+                             libxslt \
+                             libxml2 \
+                             libpqxx \
+                             nano \
+                             linux-api-headers \
+                             freetype2 \
+                             jpeg-archive \
+                             tzdata \
+                             perl \
+                             openssl \
+                             sudo \
+                             make \
+                             gcc \
+                             g++ \
+                             gcc8 \
+                             zbar \
+                             libc-dev \
+                             imagemagick \
+                             musl-dev \
+                             libwebp \
+                             musl \
+                             ffmpeg \
+                             autoconf \ 
+                             file \
+                             libtool \
+                             openssh \
+                             procps-ng
+RUN sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers
+RUN useradd pagermaid -r -m -d /pagermaid
+RUN usermod -aG wheel,users pagermaid
+USER pagermaid
+RUN mkdir /pagermaid/workdir
+RUN git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir
+WORKDIR /pagermaid/workdir
+RUN python3 -m virtualenv venv
+RUN source venv/bin/activate; pip3 install -r requirements.txt
+CMD ["sh","utils/docker-run.sh"]
