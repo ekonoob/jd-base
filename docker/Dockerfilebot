@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.10
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
@@ -6,26 +6,22 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     PS1="\u@\h:\w \$ " \
     DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
-RUN apt-get update && \
-    apt-get install -y python3 \
+RUN source ~/.bashrc \
+    && apt-get update \
+    && apt-get upgrade \
     && apt-get install -y tzdata \
-    python3-dev \
     git \
     libzbar-dev \
     apt-utils \
     openssl \
     bzip2 \
     sqlite \
-    tesseract-ocr \
     fortune-mod \
-    ffmpeg \
-    iputils-ping \
     figlet \
-    gdebi \
+    python3.8 \
     redis \
     libxml2-dev \
     libxslt1-dev \
-    apt-utils  \
     zlib1g-dev \
     libevent-dev \
     libffi-dev \
@@ -38,12 +34,12 @@ RUN apt-get update && \
     ffmpeg \
     file \
     python3-pip \
-&& pip3 install psutil pyqrcode pypng pyzbar emoji email_validator youtube_dl pyyaml redis coloredlogs requests pytz cowpy googletrans translate gtts gtts-token wordcloud telethon pillow python-magic pygments distutils2-py3 speedtest-cli gitpython werkzeug flask flask_sqlalchemy flask_login flask_bcrypt flask_wtf wtforms cheroot PySocks certifi magic_google \
-RUN sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers
-RUN useradd pagermaid -r -m -d /pagermaid
-RUN usermod -aG wheel,users pagermaid
-USER pagermaid
-RUN mkdir /pagermaid/workdir
-RUN git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir
+&& pip3 install virtualenv \
+&& sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
+&& mkdir -p /pagermaid/workdir \
+&& git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
+&& cd /pagermaid/workdir \
+&& python3 -m virtualenv venv \
+&& source venv/bin/activate; pip3 install -r requirements.txt
 WORKDIR /pagermaid/workdir
 CMD ["sh","utils/docker-run.sh"]
