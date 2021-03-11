@@ -24,7 +24,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              fortune-mod \
                              curl \
                              figlet \
-                             python-virtualenv \
                              libxslt \
                              libxml2 \
                              libpqxx \
@@ -62,6 +61,4 @@ USER pagermaid
 RUN mkdir /pagermaid/workdir
 RUN git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir
 WORKDIR /pagermaid/workdir
-RUN python3 -m virtualenv venv
-RUN source venv/bin/activate; pip3 install -r requirements.txt
 CMD ["sh","utils/docker-run.sh"]

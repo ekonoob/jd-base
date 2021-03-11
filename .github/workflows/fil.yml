@@ -15,7 +15,7 @@ jobs:
           publish: true
           imageName: jdnoob/tg
           dockerFile: docker/Dockerfilebot
-          platform: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
+          platform: linux/amd64,linux/arm64
           tag: bot
           dockerUser: ${{ secrets.DOCKER_USERNAME }}
           dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
