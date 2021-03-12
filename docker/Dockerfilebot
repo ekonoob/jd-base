@@ -41,10 +41,10 @@ RUN apt-get update && \
 && pip3 install dateparser \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \    
-&& virtualenv -p python3 pagermaid/workdir/.env \
-&& /bin/bash -c "source pagermaid/workdir/.env/bin/activate" \
 && git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
 && cd /pagermaid/workdir \
+&& virtualenv -p python3 pagermaid/workdir/.env \
+&& /bin/bash -c "source pagermaid/workdir/.env/bin/activate" \
 && pip3 install -r pagermaid/workdir/requirements.txt \
 && apt-get clean \
 && apt-get autoclean \
