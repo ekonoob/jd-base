@@ -1,13 +1,11 @@
 FROM ubuntu:21.04
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
-    LC_ALL=C \
-    SHELL=/bin/bash \
-    PS1="\u@\h:\w \$ " \
     DEBIAN_FRONTEND=noninteractive
-SHELL ["/bin/bash", "-c"]
-RUN apt-get update && \
-    apt-get install -y python3 \
+RUN set -ex \
+    && apt-get update \
+    && apt-get install -y curl \
+    && apt-get install -y python3 \
     && apt-get install -y tzdata \
     python3-dev \
     git \
@@ -16,6 +14,8 @@ RUN apt-get update && \
     openssl \
     bzip2 \
     sqlite \
+    linux-base \
+    net-tools \
     tesseract-ocr \
     fortune-mod \
     ffmpeg \
