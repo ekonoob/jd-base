@@ -3,20 +3,15 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
-    && apt-get install -y python3 \
+    apt-get install -y python3 \
     && apt-get install -y tzdata \
-    && apt install -y python3-dev python3-pip \
-    && apt install libgl1-mesa-glx -y \
-    && apt-get install libglib2.0-0 -y \
-    && pip3 install virtualenv \
+    python3-dev \
     git \
     libzbar-dev \
     apt-utils \
     openssl \
     bzip2 \
     sqlite \
-    linux-base \
-    net-tools \
     tesseract-ocr \
     fortune-mod \
     ffmpeg \
@@ -38,7 +33,8 @@ RUN apt-get update && \
     imagemagick \
     ffmpeg \
     file \
-&& pip3 install dateparser \
+    python3-pip \
+&& pip3 install virtualenv \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \    
 && git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
