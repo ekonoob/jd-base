@@ -1,4 +1,4 @@
-FROM ubuntu:20.10
+FROM ubuntu:20.04
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
@@ -6,21 +6,26 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     PS1="\u@\h:\w \$ " \
     DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
-RUN apt-get update \
-    && apt-get upgrade \
+RUN apt-get update && \
+    apt-get install -y python3 \
     && apt-get install -y tzdata \
+    python3-dev \
     git \
     libzbar-dev \
     apt-utils \
     openssl \
     bzip2 \
     sqlite \
+    tesseract-ocr \
     fortune-mod \
+    ffmpeg \
+    iputils-ping \
     figlet \
-    python3.8 \
+    gdebi \
     redis \
     libxml2-dev \
     libxslt1-dev \
+    apt-utils  \
     zlib1g-dev \
     libevent-dev \
     libffi-dev \
@@ -34,11 +39,15 @@ RUN apt-get update \
     file \
     python3-pip \
 && pip3 install virtualenv \
+&& pip3 install dateparser \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
 && git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
 && cd /pagermaid/workdir \
 && python3 -m virtualenv venv \
-&& source venv/bin/activate; pip3 install -r requirements.txt
+&& source venv/bin/activate; pip3 install -r requirements.txt \
+&& apt-get clean \
+&& apt-get autoclean \
+&& rm -rf /var/lib/apt/lists/*
 WORKDIR /pagermaid/workdir
 CMD ["sh","utils/docker-run.sh"]
