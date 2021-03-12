@@ -43,7 +43,7 @@ RUN apt-get update \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \    
 && virtualenv -p python3 pagermaid/workdir/.env \
-&& /bin/bash -c "source root/src/.env/bin/activate" \
+&& /bin/bash -c "source pagermaid/workdir/.env/bin/activate" \
 && git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
 && cd /pagermaid/workdir \
 && pip3 install -r pagermaid/workdir/requirements.txt \
