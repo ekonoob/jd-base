@@ -2,7 +2,7 @@ FROM ubuntu:21.04
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     DEBIAN_FRONTEND=noninteractive
-RUN apt-get update \
+RUN apt-get update && \
     && apt-get install -y curl \
     && apt-get install -y python3 \
     && apt-get install -y tzdata \
