@@ -49,4 +49,4 @@ RUN apt-get update && \
 && apt-get autoclean \
 && rm -rf /var/lib/apt/lists/*
 WORKDIR /pagermaid/workdir
-CMD ["sh","utils/docker-run.sh"]
+CMD ["sh","install.sh"]
