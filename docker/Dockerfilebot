@@ -37,7 +37,7 @@ RUN apt-get update && \
     ffmpeg \
     file \
     python3-pip \
-&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && pip3 install virtualenv \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
