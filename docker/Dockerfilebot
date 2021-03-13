@@ -41,8 +41,8 @@ RUN apt-get update && \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
-&& COPY docker-run.sh /pagermaid/workdir \
-&& git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
+&& COPY docker-run2.sh /pagermaid/workdir \
+&& git clone -b master https://github.com/ekonoob/PagerMaid-Modify.git /pagermaid/workdir \
 && cd /pagermaid/workdir \
 && pip3 install -r requirements.txt \
 && pip3 install dateparser \
