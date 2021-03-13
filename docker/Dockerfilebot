@@ -48,7 +48,7 @@ RUN apt-get update && \
 && apt-get clean \
 && apt-get autoclean \
 && rm -rf /var/lib/apt/lists/* \
-COPY docker/docker-run.sh /pagermaid/workdir \
+COPY docker-run.sh /pagermaid/workdir \
 RUN chmod +x /docker-run.sh
 WORKDIR /pagermaid/workdir
 CMD ["sh","docker-run.sh"]
