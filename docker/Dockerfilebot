@@ -39,13 +39,11 @@ RUN apt-get update && \
     file \
     python3-pip \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-&& pip3 install virtualenv \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
 && git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
 && cd /pagermaid/workdir \
-&& python3 -m virtualenv venv \
-&& source venv/bin/activate; pip3 install -r requirements.txt \
+&& pip3 install -r requirements.txt \
 && apt-get clean \
 && apt-get autoclean \
 && rm -rf /var/lib/apt/lists/*
