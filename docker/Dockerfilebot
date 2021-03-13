@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:20.04
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     LC_ALL=C \
@@ -38,6 +38,7 @@ RUN apt-get update && \
     ffmpeg \
     file \
     python3-pip \
+&& python3 -m pip install dateparser \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
