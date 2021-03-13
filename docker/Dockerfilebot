@@ -48,6 +48,6 @@ RUN apt-get update && \
 && apt-get clean \
 && apt-get autoclean \
 && rm -rf /var/lib/apt/lists/* \
-ADD docker-run.sh /pagermaid/workdir \
+ADD docker/docker-run.sh /pagermaid/workdir \
 WORKDIR /pagermaid/workdir
 CMD ["sh","docker-run.sh"]
