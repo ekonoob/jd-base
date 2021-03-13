@@ -1,9 +1,12 @@
-FROM ubuntu:21.04
+FROM ubuntu:20.04
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     LANG=zh_CN.UTF-8 \
     DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
-    apt-get install -y python3 \
+    apt-get install --only-upgrade git -y \
+    add-apt-repository ppa:jonathonf/python-3.6 \
+    apt-get apt-get install python3.6 -y \
+    apt-get install software-properties-common python-software-properties -y  \
     && apt-get install -y tzdata \
     python3-dev \
     git \
