@@ -4,6 +4,9 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y python3.6 \
+    apt-get update \
+    apt-get upgrade -y \
+    apt-get install -y software-properties-common python-software-properties  \
     && apt-get install -y tzdata \
     python3-dev \
     git \
@@ -34,6 +37,7 @@ RUN apt-get update && \
     ffmpeg \
     file \
     python3-pip \
+&& ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 && pip3 install virtualenv \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
