@@ -4,8 +4,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y python3.6 \
-    apt-get update \
-    apt-get upgrade -y \
     && apt-get install -y tzdata \
     python3-dev \
     git \
