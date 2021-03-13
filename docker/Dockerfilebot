@@ -7,7 +7,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update && \
-    apt-get install -y python3 \
+    apt-get install -y python3.6 \
     && apt-get install -y tzdata \
     python3-dev \
     git \
@@ -39,14 +39,16 @@ RUN apt-get update && \
     file \
     python3-pip \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+&& pip3 install virtualenv \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
+&& apt-get clean \
+&& apt-get autoclean \
+&& rm -rf /var/lib/apt/lists/* \
 && mkdir -p /pagermaid/workdir \
 && git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
 && cd /pagermaid/workdir \
-&& pip3 install dateparser \
-&& pip3 install -r requirements.txt \
-&& apt-get clean \
-&& apt-get autoclean \
-&& rm -rf /var/lib/apt/lists/*
+&& python3 -m virtualenv venv \
+&& source venv/bin/python;pip3 install -r requirements.txt \
+&& /pagermaid/workdir/venv/bin/python -m pip install pypi dateparser \
 WORKDIR /pagermaid/workdir
-CMD ["sh","install.sh"]
+CMD ["sh","utils/docker-run.sh"]
