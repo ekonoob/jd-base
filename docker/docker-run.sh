@@ -75,7 +75,6 @@ login() {
   echo ""
   sleep 2
   echo "Hello world!" > /pagermaid/workdir/install.lock
-  /pagermaid/workdir/venv/bin/python -m pagermaid
   exit
 }
 
@@ -87,7 +86,6 @@ start_installation() {
     login
   else
     nohup redis-server &
-    /pagermaid/workdir/venv/bin/python -m pagermaid
   fi
 }
 
