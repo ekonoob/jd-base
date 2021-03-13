@@ -48,7 +48,7 @@ RUN apt-get update && \
 && git clone -b master https://github.com/xtaodada/PagerMaid-Modify.git /pagermaid/workdir \
 && cd /pagermaid/workdir \
 && python3 -m virtualenv venv \
-&& source venv/bin/python;pip3 install -r requirements.txt \
+&& source venv/bin/activate; pip3 install -r requirements.txt \
 && /pagermaid/workdir/venv/bin/python -m pip install pypi dateparser \
 WORKDIR /pagermaid/workdir
 CMD ["sh","utils/docker-run.sh"]
