@@ -38,7 +38,6 @@ RUN apt-get update && \
     ffmpeg \
     file \
     python3-pip \
-&& python3 -m pip install dateparser \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
