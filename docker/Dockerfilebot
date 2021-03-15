@@ -30,9 +30,6 @@ RUN source ~/.bashrc \
     libevent-dev \
     libffi-dev \
     gcc \
-&& rm /usr/bin/python \
-&& ln -s /usr/bin/python3.6 /usr/bin/python \
-&& ln -s /usr/bin/pip3 /usr/bin/pip \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
