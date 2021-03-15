@@ -9,9 +9,37 @@ SHELL ["/bin/bash", "-c"]
 COPY /docker/docker-run.sh /root
 RUN source ~/.bashrc \
 && apt-get update \
-&& apt-get -y install software-properties-common \
-&& add-apt-repository ppa:dawidd0811/neofetch \
-&& apt-get -y install tzdata git curl wget zsh x11-xserver-utils imagemagick neofetch libzbar-dev redis-server python3-pip \
+&& apt-get install -y tzdata \
+&& apt-get install redis-server -y \
+    git \
+    python3 \
+    python3-pip \
+    imagemagick \
+    libzbar-dev \
+    fortune-mod \
+    neofetch \
+    tesseract-ocr \
+    gdebi \
+    ffmpeg \
+    file \
+    net-tools \
+    iputils-ping \
+    iproute2 \
+    apt-utils \
+    openssl \
+    bzip2 \
+    sqlite \
+    figlet \
+    redis \
+    curl \
+    wget \
+    sudo \
+    libxml2-dev \
+    libxslt1-dev \
+    zlib1g-dev \
+    libevent-dev \
+    libffi-dev \
+    gcc \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
