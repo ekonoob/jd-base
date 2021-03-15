@@ -11,25 +11,7 @@ RUN source ~/.bashrc \
 && apt-get update \
 && apt-get -y install software-properties-common \
 && add-apt-repository ppa:dawidd0811/neofetch \
-&& apt-get -y install tzdata git curl wget zsh python3.6 x11-xserver-utils imagemagick neofetch libzbar-dev redis-server python3-pip \
-    fortune-mod \
-    gdebi \
-    ffmpeg \
-    file \
-    net-tools \
-    iputils-ping \
-    iproute2 \
-    apt-utils \
-    openssl \
-    bzip2 \
-    sqlite \
-    figlet \
-    libxml2-dev \
-    libxslt1-dev \
-    zlib1g-dev \
-    libevent-dev \
-    libffi-dev \
-    gcc \
+&& apt-get -y install tzdata git curl wget zsh x11-xserver-utils imagemagick neofetch libzbar-dev redis-server python3-pip \
 && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && sed -e 's;^# \(%wheel.*NOPASSWD.*\);\1;g' -i /etc/sudoers \
 && mkdir -p /pagermaid/workdir \
