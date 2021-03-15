@@ -75,6 +75,7 @@ login() {
   echo ""
   sleep 2
   echo "Hello world!" > /pagermaid/workdir/install.lock
+  python3 -m pagermaid
   exit
 }
 
@@ -86,6 +87,7 @@ start_installation() {
     login
   else
     nohup redis-server &
+    python3 -m pagermaid
   fi
 }
 
